@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Form</title>
+    <style>
+        body {
+            background-color: black;
+            background-image: url(bebek.png);
+            font-family: "Montserrat", sans-serif;
+            }
+
+        .outer {
+            background-color:  rgb(236, 236, 236);
+            padding: 10pt 20pt 0pt 20pt;
+            border-radius: 10px;
+            min-width: 660px;
+            min-height: auto;
+            position: absolute; /*Can also be `fixed`*/
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            /*Solves a problem in which the content is being cut when the div is smaller than its' wrapper:*/
+            max-width: 660px;
+            max-height: 700px;
+            overflow: auto;
+        }
+
+        #footerOuter{
+            font-size: x-small;
+            font-weight: 700;
+            text-align: center;
+            align-items: center;
+        }
+        #magnitude {
+            width: 25%;
+            font-size: x-large;
+        }
+
+        #enddate {
+            width: 25%;
+            font-size: x-large;
+        }
+
+        #DropDown{
+            font-size: x-large;
+        }
+
+        #submit{
+            width: 20%;
+            height: 20%;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #output{
+            font-size: large;
+        }
+
+        .outputValue{
+            color: red;
+            font-weight: bold;
+        }
+
+        label{
+            font-weight: bolder;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <form action="/" method="post">
+            <div id="forminput">
+                <label>Silahkan Masukan Lokasi Yang Ingin Dipilih</label><br>
+                {{ select_form | safe }}
+                <br/><br>
+                <label for="input_text">Silahkan masukan magnitudo minimum</label><br>
+                <input id="magnitude" type="number" name="input_text" min="0" max="10" step = "0.1">
+                <br/><br>
+                <label for="input_text">Silahkan masukan tanggal akhir dari prediksi</label><br>
+                <input id="enddate" type="date" name="input_date" placeholder="Select date" id="dateInput">
+                <br><br>
+                <input id="submit" type="submit" value="Submit">
+            </div>
+        </form>
+        <div id="output">
+            {% if output %} 
+                {{ output | safe}}
+            {% endif %}
+        </div>
+        <hr>
+        <div id="footerOuter">
+            <p>Christoper Bernard Suryanto | Nicholas Tanugroho | Nicholas Christivano Sarjono</p> 
+        </div>
+    </div>
+    
+    <script>
+        // Set the minimum date to today's date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dateInput').setAttribute('min', today);
+    </script>
+</body>
+</html>
